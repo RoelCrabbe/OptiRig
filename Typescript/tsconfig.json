@@ -28,7 +28,9 @@
             "@notification/*": ["features/notification/*"],
             "@notification": ["features/notification/index.ts"],
             "@profileImage/*": ["features/profileImage/*"],
-            "@profileImage": ["features/profileImage/index.ts"]
+            "@profileImage": ["features/profileImage/index.ts"],
+            "@parts/*": ["features/parts/*"],
+            "@parts": ["features/parts/index.ts"]
         },
         "skipLibCheck": true,
         "strict": true,

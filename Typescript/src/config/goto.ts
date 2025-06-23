@@ -1,6 +1,8 @@
-import { getComponentList } from 'features/parts/Search';
+import { partsService } from '@parts/index';
+import { SearchOptionsInput } from '@types';
 
 (async () => {
     const listId = 'MjtbzP';
-    getComponentList({ listId });
+    const input: SearchOptionsInput = { listId };
+    partsService.getComponentList({ searchOptionsInput: input });
 })();

@@ -43,7 +43,7 @@ export type UpdatePassWordInput = {
     confirmPassWord: string;
 };
 
-export type SearchOptions = {
+export type SearchOptionsInput = {
     region?: RegionCode;
     listId: string;
 };

@@ -1,6 +1,6 @@
-import { PcPart, SearchOptions } from '@types';
+import { PcPart, SearchOptionsInput } from '@types';
 import puppeteer from 'puppeteer';
-import { RegionCode } from './enums';
+import { RegionCode } from '../enums';
 
 const PcPartTrackerDefaultUrl = 'pcpartpicker.com';
 
@@ -21,8 +21,12 @@ const initBrowser = async (url: string) => {
     return { browser, page };
 };
 
-export const getComponentList = async (searchOptions: SearchOptions) => {
-    const { region = RegionCode.US, listId } = searchOptions;
+export const getComponentList = async ({
+    searchOptionsInput,
+}: {
+    searchOptionsInput: SearchOptionsInput;
+}): Promise<PcPart[]> => {
+    const { region = RegionCode.US, listId } = searchOptionsInput;
     let browser;
 
     try {
@@ -34,6 +38,7 @@ export const getComponentList = async (searchOptions: SearchOptions) => {
         });
 
         await page.waitForNetworkIdle({ idleTime: 500, timeout: 5000 });
+        await new Promise((res) => setTimeout(res, 500));
 
         const components: PcPart[] = await page.evaluate(() => {
             function extractPriceInfo(priceAnchor: Element | null, row: Element) {
@@ -112,10 +117,9 @@ export const getComponentList = async (searchOptions: SearchOptions) => {
         });
 
         console.log('Scraped components:', components);
-        return { components, browser };
+        return components;
     } catch (error) {
         console.error('Failed to scrape:', error);
-        if (browser) await browser.close();
         throw error;
     } finally {
         if (browser) await browser.close();

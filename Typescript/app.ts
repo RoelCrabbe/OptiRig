@@ -1,6 +1,7 @@
 import { authRouter } from '@auth/index';
 import errorLogRouter from '@errorLog/controller';
 import { handleErrorMiddleware } from '@errorLog/handler';
+import partsRouter from '@parts/controller';
 import { processEnv } from '@shared/index';
 import userRouter from '@user/controller';
 import * as bodyParser from 'body-parser';
@@ -54,6 +55,7 @@ app.get('/status', (req, res) => {
 });
 
 app.use('/auth', authRouter);
+app.use('/parts', partsRouter);
 
 app.use(
     expressjwt({
