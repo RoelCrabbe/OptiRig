@@ -18,6 +18,10 @@ export default [
                 exports: 'writable',
                 __dirname: 'readonly',
                 __filename: 'readonly',
+                setTimeout: 'readonly',
+            },
+            env: {
+                node: true,
             },
         },
         rules: {

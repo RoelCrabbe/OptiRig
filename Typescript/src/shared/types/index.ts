@@ -1,5 +1,6 @@
 import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from '@errorLog';
 import { UserRole, UserStatus } from '@user';
+import { RegionCode } from 'features/parts/enums';
 
 export type AuthenticationResponse = {
     token?: string;
@@ -40,4 +41,21 @@ export type UpdatePassWordInput = {
     currentPassWord: string;
     newPassWord: string;
     confirmPassWord: string;
+};
+
+export type SearchOptions = {
+    region?: RegionCode;
+    listId: string;
+};
+
+export type PcPart = {
+    category: string;
+    name: string;
+    imageUrl: string;
+    pcpartpicker: {
+        price: number;
+        currency: 'USD' | 'EUR' | 'GBP' | string;
+        url: string;
+        buyLink: string;
+    };
 };

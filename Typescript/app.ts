@@ -60,7 +60,7 @@ app.use(
         secret: processEnv.getJwtSecret(),
         algorithms: ['HS256'],
     }).unless({
-        path: ['/api-docs', /^\/api-docs\/.*/],
+        path: ['/api-docs', /^\/api-docs\/.*/, '/price-comparison/compare'],
     }),
 );
 
