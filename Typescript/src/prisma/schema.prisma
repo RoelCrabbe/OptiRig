@@ -1,0 +1,54 @@
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "windows"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model ErrorLog {
+    // ModelBase - Database managed metadata
+    id           Int       @id @default(autoincrement())
+    createdDate  DateTime? @default(now())
+    modifiedDate DateTime? @updatedAt
+    createdById  Int?
+    modifiedById Int?
+
+    // ErrorLog Model - Business fields
+    type         String @default("Application Error")
+    severity     String @default("Handled")
+    httpMethod   String @default("Post")
+    errorMessage String
+    stackTrace   String @default("No StackTrace Available")
+    requestPath  String
+
+    // Lifecycle - Management Fields
+    status       String    @default("New")
+    resolvedById Int?
+    resolvedDate DateTime?
+
+    @@map("ErrorLogs")
+}
+
+model User {
+    // ModelBase - Database managed metadata
+    id           Int       @id @default(autoincrement())
+    createdDate  DateTime? @default(now())
+    modifiedDate DateTime? @updatedAt
+    createdById  Int?
+    modifiedById Int?
+
+    // User Model - Business fields
+    userName    String  @unique
+    firstName   String
+    lastName    String
+    email       String  @unique
+    passWord    String
+    role        String  @default("Guest")
+    status      String  @default("Active")
+    phoneNumber String?
+
+    @@map("Users")
+}

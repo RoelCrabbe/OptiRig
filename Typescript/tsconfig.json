@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "CommonJS",
+        "outDir": "./dist",
+        "paths": {
+            "@base/*": ["base/*"],
+            "@base": ["base/index.ts"],
+            "@config/*": ["config/*"],
+            "@config": ["config/index.ts"],
+            "@types": ["shared/types/index.ts"],
+            "@types/*": ["shared/types/*"],
+            "@utils/*": ["shared/utils/*"],
+            "@utils": ["shared/utils/index.ts"],
+            "@shared/*": ["shared/*"],
+            "@prisma/*": ["prisma/*"],
+            "@prisma": ["prisma/index.ts"],
+            "@auth/*": ["features/auth/*"],
+            "@auth": ["features/auth/index.ts"],
+            "@errorLog/*": ["features/errorLog/*"],
+            "@errorLog": ["features/errorLog/index.ts"],
+            "@exceptions/*": ["features/errorLog/exceptions/*"],
+            "@exceptions": ["features/errorLog/exceptions/index.ts"],
+            "@user/*": ["features/user/*"],
+            "@user": ["features/user/index.ts"],
+            "@notification/*": ["features/notification/*"],
+            "@notification": ["features/notification/index.ts"],
+            "@profileImage/*": ["features/profileImage/*"],
+            "@profileImage": ["features/profileImage/index.ts"]
+        },
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2020",
+        "types": ["node", "@types/jest"]
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["src/**/*.ts", "app.ts"]
+}
