@@ -85,3 +85,11 @@ export type PcPartType = {
         buyLink: string;
     };
 };
+
+export type ComponentListType = {
+    id?: number;
+    wattage: number;
+    totalPrice: number;
+    totalCurrency: string;
+    components: PcPartType[];
+};

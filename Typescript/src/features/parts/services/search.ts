@@ -1,4 +1,5 @@
 import {
+    ComponentListType,
     PcPartCategory,
     PcPartType,
     RegionCode,
@@ -29,7 +30,7 @@ export const getComponentList = async ({
     searchOptionsInput,
 }: {
     searchOptionsInput: SearchOptionsType;
-}): Promise<PcPartType[]> => {
+}): Promise<ComponentListType> => {
     const { region = RegionCode.US, listId } = searchOptionsInput;
     let browser;
 
@@ -44,7 +45,7 @@ export const getComponentList = async ({
         await page.waitForNetworkIdle({ idleTime: 500, timeout: 5000 });
         await new Promise((res) => setTimeout(res, 500));
 
-        const components: PcPartType[] = await page.evaluate(() => {
+        const result = await page.evaluate(() => {
             function extractPriceInfo(priceAnchor: Element | null, row: Element) {
                 const priceElement = priceAnchor || row.querySelector('td.td__price a');
                 if (!priceElement) return null;
@@ -75,11 +76,82 @@ export const getComponentList = async ({
                 return rawImageUrl.startsWith('//') ? `https:${rawImageUrl}` : rawImageUrl;
             }
 
+            function extractWattage(): number {
+                const wattageElement = document.querySelector('.partlist__keyMetric');
+                if (!wattageElement) throw new Error('Wattage element not found');
+
+                const wattageText = wattageElement.textContent?.trim() || '';
+                const wattageMatch = wattageText.match(/(\d+)W/);
+
+                if (!wattageMatch) throw new Error('Wattage value not found');
+
+                return parseInt(wattageMatch[1], 10);
+            }
+
+            function extractTotalPrice(): {
+                totalPrice: number;
+                totalCurrency: string;
+            } {
+                const totalRows = document.querySelectorAll('tr.tr__total');
+                const finalTotalRow = document.querySelector('tr.tr__total--final');
+
+                if (!finalTotalRow) {
+                    const lastTotalRow = totalRows[totalRows.length - 1];
+                    if (!lastTotalRow) throw new Error('No total price rows found');
+
+                    const priceElement = lastTotalRow.querySelector('td.td__price');
+                    if (!priceElement) throw new Error('Total price element not found');
+
+                    const priceText = priceElement.textContent?.trim() || '';
+                    const priceMatch = priceText.match(/([€$])\s?([0-9,.]+)/);
+
+                    if (!priceMatch) throw new Error('Total price format not recognized');
+
+                    const currencySymbol = priceMatch[1];
+                    const currency =
+                        currencySymbol === '€' ? 'EUR' : currencySymbol === '$' ? 'USD' : null;
+                    if (!currency) throw new Error(`Unsupported currency: ${currencySymbol}`);
+
+                    const rawPrice = priceMatch[2].replace(/,/g, '').replace(/[^0-9.]/g, '');
+                    const price = parseFloat(rawPrice);
+
+                    if (isNaN(price)) throw new Error('Invalid price value');
+
+                    return {
+                        totalPrice: price,
+                        totalCurrency: currency,
+                    };
+                }
+
+                const priceElement = finalTotalRow.querySelector('td.td__price');
+                if (!priceElement) throw new Error('Final total price element not found');
+
+                const priceText = priceElement.textContent?.trim() || '';
+                const priceMatch = priceText.match(/([€$])\s?([0-9,.]+)/);
+
+                if (!priceMatch) throw new Error('Final total price format not recognized');
+
+                const currencySymbol = priceMatch[1];
+                const currency =
+                    currencySymbol === '€' ? 'EUR' : currencySymbol === '$' ? 'USD' : null;
+                if (!currency) throw new Error(`Unsupported currency: ${currencySymbol}`);
+
+                const rawPrice = priceMatch[2].replace(/,/g, '').replace(/[^0-9.]/g, '');
+                const price = parseFloat(rawPrice);
+
+                if (isNaN(price)) throw new Error('Invalid final price value');
+
+                return {
+                    totalPrice: price,
+                    totalCurrency: currency,
+                };
+            }
+
             const rows = document.querySelectorAll(
                 'div.partlist.partlist--view table tbody tr.tr__product',
             );
 
-            const results: PcPartType[] = [];
+            const components: PcPartType[] = [];
 
             rows.forEach((row, index) => {
                 try {
@@ -99,7 +171,7 @@ export const getComponentList = async ({
                     const priceInfo = extractPriceInfo(priceAnchor, row);
                     const imageUrl = extractImageUrl(row);
 
-                    results.push({
+                    components.push({
                         id: index + 1,
                         category: component as PcPartCategory,
                         name,
@@ -118,11 +190,19 @@ export const getComponentList = async ({
                 }
             });
 
-            return results;
+            const wattage = extractWattage();
+            const { totalPrice, totalCurrency } = extractTotalPrice();
+
+            return {
+                wattage,
+                totalPrice,
+                totalCurrency,
+                components,
+            };
         });
 
-        console.log('Scraped components:', components);
-        return components;
+        console.log('Scraped data:', result);
+        return result;
     } catch (error) {
         console.error('Failed to scrape:', error);
         throw error;

@@ -9,12 +9,18 @@ import Row from '@components/ui/container/Row';
 import InputField from '@components/ui/InputField';
 import InputSelect from '@components/ui/InputSelect';
 import StatusMessage from '@components/ui/StatusMessage';
-import { faExternalLink, faShoppingCart, faSitemap } from '@fortawesome/free-solid-svg-icons';
+import {
+    faBolt,
+    faDollarSign,
+    faExternalLink,
+    faShoppingCart,
+    faSitemap,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useOptionalAuth } from '@hooks/useAuthGuard';
-import { useEntityList } from '@hooks/useEntity';
+import { useEntity } from '@hooks/useEntity';
 import { handleErrorLabel } from '@lib';
-import { PcPartType, RegionCode } from '@roelcrabbe/optirig-types';
+import { ComponentListType, RegionCode } from '@roelcrabbe/optirig-types';
 import { partService } from '@services/index';
 import { getPcPartCategoryClass, getPcPartCategoryIcon, LabelMessage } from '@types';
 import { extractListId, validatePartPickerUrl, validateRegionCode } from '@validators/parts';
@@ -27,7 +33,7 @@ const Home: React.FC = () => {
     const [region, setRegion] = useState<RegionCode | null>(RegionCode.US);
     const [labelMessage, setLabelMessage] = useState<LabelMessage>();
     const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-    const { entities, safeSetEntities } = useEntityList<PcPartType>([]);
+    const { entity, setEntity } = useEntity<ComponentListType>();
 
     const validate = (): boolean => {
         const errors = [validatePartPickerUrl(partPickerUrl), validateRegionCode(region)].filter(
@@ -77,7 +83,7 @@ const Home: React.FC = () => {
                 return;
             }
 
-            safeSetEntities(componentJson);
+            setEntity(componentJson);
         } catch (error) {
             handleErrorLabel(error, setLabelMessage);
         }
@@ -154,19 +160,56 @@ const Home: React.FC = () => {
                     </Card>
                 </Column>
 
-                {entities.length > 0 && (
+                {entity && (
                     <Column gap={'8'} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                        <Column className={'items-center text-center'}>
-                            <h2 className="text-3xl font-semibold text-gray-900">
-                                Pc Part Picker Build
-                            </h2>
-                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                                OptiRig found the following components in your build
-                            </p>
+                        <Column className="items-center text-center space-y-6">
+                            <div>
+                                <h2 className="text-3xl font-semibold text-gray-900 mb-2">
+                                    PC Part Picker Build
+                                </h2>
+                                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                                    OptiRig found the following components in your build
+                                </p>
+                            </div>
+
+                            <div className="flex gap-4 w-full max-w-lg">
+                                <div className="bg-blue-100 px-4 py-3 rounded-lg flex items-center gap-3 flex-1">
+                                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <FontAwesomeIcon
+                                            icon={faBolt}
+                                            className="text-white text-sm"
+                                        />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-sm text-gray-600">Estimated Wattage</p>
+                                        <p className="text-xl font-bold text-blue-600">
+                                            {entity.wattage}W
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-green-100 px-4 py-3 rounded-lg flex items-center gap-3 flex-1">
+                                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <FontAwesomeIcon
+                                            icon={faDollarSign}
+                                            className="text-white text-sm"
+                                        />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-sm text-gray-600">Total Cost</p>
+                                        <p className="text-xl font-bold text-green-600">
+                                            {entity.totalCurrency === 'USD' && '$'}
+                                            {entity.totalCurrency === 'EUR' && '€'}
+                                            {entity.totalCurrency === 'GBP' && '£'}
+                                            {entity.totalPrice.toFixed(2)}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </Column>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {entities.map((part) => (
+                            {entity.components.map((part) => (
                                 <FeatureCard
                                     key={part.id}
                                     easeIn
