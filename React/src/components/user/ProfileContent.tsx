@@ -1,11 +1,11 @@
 import ProfileEditOverview from '@components/user/ProfileEditOverview';
 import ProfileOverview from '@components/user/ProfileOverview';
 import { useToggle } from '@hooks/useToggle';
-import { User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
 
 interface Props {
-    user: User;
-    onUpdate: (updatedUser: User) => void;
+    user: UserType;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const ProfileContent: React.FC<Props> = ({ user, onUpdate }) => {

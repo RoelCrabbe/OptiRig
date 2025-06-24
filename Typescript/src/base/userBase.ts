@@ -1,5 +1,5 @@
 import { EntityBase } from '@base/entityBase';
-import { UserRole, UserStatus } from '@user';
+import { UserRole, UserStatus } from '@roelcrabbe/optirig-types';
 
 export abstract class UserBase extends EntityBase {
     protected userName: string;

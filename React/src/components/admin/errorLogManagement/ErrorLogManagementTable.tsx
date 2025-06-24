@@ -7,10 +7,9 @@ import Badge from '@components/ui/container/Badge';
 import { faArrowsUpDown, faEye, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter, formatDateOnly } from '@lib';
+import { ErrorLogType, ErrorStatus } from '@roelcrabbe/optirig-types';
 import { errorLogService } from '@services/index';
 import {
-    ErrorLog,
-    ErrorStatus,
     getErrorHttpMethodColor,
     getErrorHttpMethodIcon,
     getErrorSeverityColor,
@@ -23,11 +22,11 @@ import { useState } from 'react';
 
 interface Props {
     selectedStatus: ErrorStatus;
-    errorLogs: ErrorLog[];
+    errorLogs: ErrorLogType[];
     isError: boolean;
     isLoading: boolean;
     onRetry: () => void;
-    onUpdate: (updatedErrorLog: ErrorLog) => void;
+    onUpdate: (updatedErrorLog: ErrorLogType) => void;
 }
 
 const ErrorLogManagementTable: React.FC<Props> = ({
@@ -38,9 +37,9 @@ const ErrorLogManagementTable: React.FC<Props> = ({
     onRetry,
     onUpdate,
 }) => {
-    const [selectedErrorLog, setSelectedErrorLog] = useState<ErrorLog | null>(null);
+    const [selectedErrorLog, setSelectedErrorLog] = useState<ErrorLogType | null>(null);
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-    const [pendingUpdate, setPendingUpdate] = useState<ErrorLog | null>(null);
+    const [pendingUpdate, setPendingUpdate] = useState<ErrorLogType | null>(null);
     const [hasModalUpdated, setHasModalUpdated] = useState<boolean>(false);
 
     if (isLoading) {
@@ -58,7 +57,7 @@ const ErrorLogManagementTable: React.FC<Props> = ({
 
     const isNotResolved = selectedStatus !== ErrorStatus.Resolved;
 
-    const handleViewDetails = async (errorLog: ErrorLog) => {
+    const handleViewDetails = async (errorLog: ErrorLogType) => {
         setSelectedErrorLog(errorLog);
         setHasModalUpdated(false);
         await handleReview(errorLog);
@@ -80,12 +79,12 @@ const ErrorLogManagementTable: React.FC<Props> = ({
         setSelectedUserId(userId);
     };
 
-    const handleModalUpdate = (updatedErrorLog: ErrorLog) => {
+    const handleModalUpdate = (updatedErrorLog: ErrorLogType) => {
         setHasModalUpdated(true);
         onUpdate(updatedErrorLog);
     };
 
-    const handleReview = async (errorLog: ErrorLog) => {
+    const handleReview = async (errorLog: ErrorLogType) => {
         const formData: any = {
             id: errorLog.id,
             status: ErrorStatus.Reviewed,

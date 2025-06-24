@@ -1,8 +1,8 @@
 import { partsService } from '@parts/index';
-import { SearchOptionsInput } from '@types';
+import { SearchOptionsType } from '@roelcrabbe/optirig-types';
 
 (async () => {
     const listId = 'MjtbzP';
-    const input: SearchOptionsInput = { listId };
+    const input: SearchOptionsType = { listId };
     partsService.getComponentList({ searchOptionsInput: input });
 })();

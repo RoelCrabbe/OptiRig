@@ -18,11 +18,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter } from '@lib';
-import { getUserRoleColor, getUserStatusColor, getUserStatusIcon, User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
+import { getUserRoleColor, getUserStatusColor, getUserStatusIcon } from '@types';
 import { useEffect, useState } from 'react';
 
 interface Props {
-    user: User;
+    user: UserType;
     onEdit: () => void;
 }
 

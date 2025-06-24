@@ -3,16 +3,16 @@ import AdminPageLayout from '@components/layout/AdminPageLayout';
 import { useRequireAdmin } from '@hooks/useAuthGuard';
 import { useEntityList } from '@hooks/useEntity';
 import { updateErrorLogs } from '@lib';
+import { ErrorLogType, ErrorStatus } from '@roelcrabbe/optirig-types';
 import { errorLogService } from '@services/index';
 import { useQuery } from '@tanstack/react-query';
-import { ErrorLog, ErrorStatus } from '@types';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 
 const ReportsPage: React.FC = () => {
     const { shouldRender } = useRequireAdmin();
     const [selectedStatus, setSelectedStatus] = useState<ErrorStatus>(ErrorStatus.New);
-    const { entities, handleUpdate, safeSetEntities } = useEntityList<ErrorLog>([]);
+    const { entities, handleUpdate, safeSetEntities } = useEntityList<ErrorLogType>([]);
 
     const getErrorLogsByStatus = async (status: ErrorStatus) => {
         let response;
@@ -48,7 +48,7 @@ const ReportsPage: React.FC = () => {
         safeSetEntities(errorLogsData);
     }, [errorLogsData]);
 
-    const onUpdate = (updatedErrorLog: ErrorLog) => {
+    const onUpdate = (updatedErrorLog: ErrorLogType) => {
         handleUpdate(updatedErrorLog, (prev) =>
             updateErrorLogs(prev, updatedErrorLog, selectedStatus),
         );

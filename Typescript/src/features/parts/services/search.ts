@@ -1,6 +1,5 @@
-import { PcPart, SearchOptionsInput } from '@types';
+import { PcPartType, RegionCode, SearchOptionsType } from '@roelcrabbe/optirig-types';
 import puppeteer from 'puppeteer';
-import { RegionCode } from '../enums';
 
 const PcPartTrackerDefaultUrl = 'pcpartpicker.com';
 
@@ -24,8 +23,8 @@ const initBrowser = async (url: string) => {
 export const getComponentList = async ({
     searchOptionsInput,
 }: {
-    searchOptionsInput: SearchOptionsInput;
-}): Promise<PcPart[]> => {
+    searchOptionsInput: SearchOptionsType;
+}): Promise<PcPartType[]> => {
     const { region = RegionCode.US, listId } = searchOptionsInput;
     let browser;
 
@@ -40,7 +39,7 @@ export const getComponentList = async ({
         await page.waitForNetworkIdle({ idleTime: 500, timeout: 5000 });
         await new Promise((res) => setTimeout(res, 500));
 
-        const components: PcPart[] = await page.evaluate(() => {
+        const components: PcPartType[] = await page.evaluate(() => {
             function extractPriceInfo(priceAnchor: Element | null, row: Element) {
                 const priceElement = priceAnchor || row.querySelector('td.td__price a');
                 if (!priceElement) return null;
@@ -75,7 +74,7 @@ export const getComponentList = async ({
                 'div.partlist.partlist--view table tbody tr.tr__product',
             );
 
-            const results: PcPart[] = [];
+            const results: PcPartType[] = [];
 
             rows.forEach((row, index) => {
                 try {

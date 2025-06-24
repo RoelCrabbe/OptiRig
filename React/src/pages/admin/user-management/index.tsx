@@ -2,15 +2,15 @@ import UserManagement from '@components/admin/userManagement/UserManagement';
 import AdminPageLayout from '@components/layout/AdminPageLayout';
 import { useRequireAdmin } from '@hooks/useAuthGuard';
 import { useEntityList } from '@hooks/useEntity';
+import { UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
 import { useQuery } from '@tanstack/react-query';
-import { User } from '@types';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect } from 'react';
 
 const UserManagementPage: React.FC = () => {
     const { shouldRender } = useRequireAdmin();
-    const { entities, handleUpdate, safeSetEntities } = useEntityList<User>([]);
+    const { entities, handleUpdate, safeSetEntities } = useEntityList<UserType>([]);
 
     const {
         data: usersData,

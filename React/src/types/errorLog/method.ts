@@ -6,23 +6,7 @@ import {
     faPlusCircle,
     faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-
-export const ErrorHttpMethod = {
-    Get: 'Get',
-    Post: 'Post',
-    Put: 'Put',
-    Patch: 'Patch',
-    Delete: 'Delete',
-} as const;
-
-export type ErrorHttpMethod = (typeof ErrorHttpMethod)[keyof typeof ErrorHttpMethod];
-
-export const isValidErrorHttpMethod = (method: unknown): method is ErrorHttpMethod => {
-    return (
-        typeof method === 'string' &&
-        Object.values(ErrorHttpMethod).includes(method as ErrorHttpMethod)
-    );
-};
+import { ErrorHttpMethod } from '@roelcrabbe/optirig-types';
 
 export const getErrorHttpMethodColor = (type: ErrorHttpMethod): string => {
     switch (type) {

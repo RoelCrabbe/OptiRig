@@ -1,6 +1,6 @@
-import { ErrorStatus } from '@errorLog/enums';
 import { NotFoundError } from '@errorLog/exceptions';
 import { ErrorLog, errorLogRepository } from '@errorLog/index';
+import { ErrorStatus } from '@roelcrabbe/optirig-types';
 
 /**
  * This function retrieves all new error logs from the error log repository.

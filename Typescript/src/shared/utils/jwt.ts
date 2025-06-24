@@ -1,4 +1,4 @@
-import { JwtToken } from '@types';
+import { JwtToken } from '@roelcrabbe/optirig-types';
 import { getJwtExpiresHours, getJwtSecret } from '@utils/processEnv';
 import jwt from 'jsonwebtoken';
 

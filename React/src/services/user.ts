@@ -1,5 +1,5 @@
 import { getToken, processEnv } from '@lib';
-import { UpdatePassWord, User } from '@types';
+import { UpdatePassWordType, UserType } from '@roelcrabbe/optirig-types';
 
 export const getCurrentUser = () => {
     return fetch(processEnv.getApiUrl() + `/users/current`, {
@@ -21,7 +21,7 @@ export const getAllUsers = () => {
     });
 };
 
-export const updateUser = (user: User) => {
+export const updateUser = (user: UserType) => {
     return fetch(processEnv.getApiUrl() + `/users`, {
         method: 'PUT',
         headers: {
@@ -42,7 +42,7 @@ export const getUserById = async (userId: number) => {
     });
 };
 
-export const updatePassWord = async (updatePassWord: UpdatePassWord) => {
+export const updatePassWord = async (updatePassWord: UpdatePassWordType) => {
     return fetch(processEnv.getApiUrl() + `/users/change-password`, {
         method: 'PUT',
         headers: {

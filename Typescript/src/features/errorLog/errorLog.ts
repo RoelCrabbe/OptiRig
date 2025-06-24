@@ -1,7 +1,7 @@
 import { EntityBase } from '@base/entityBase';
-import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from '@errorLog';
 import { ValidationError } from '@errorLog/exceptions';
 import { PrismaErrorLog } from '@prisma';
+import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from '@roelcrabbe/optirig-types';
 import { User } from '@user';
 
 export class ErrorLog extends EntityBase {

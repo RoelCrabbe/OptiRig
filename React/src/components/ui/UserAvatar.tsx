@@ -1,8 +1,8 @@
-import { User } from '@types'; // Adjust import path as needed
+import { UserType } from '@roelcrabbe/optirig-types';
 import React from 'react';
 
 interface Props {
-    user: User;
+    user: UserType;
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 }
 

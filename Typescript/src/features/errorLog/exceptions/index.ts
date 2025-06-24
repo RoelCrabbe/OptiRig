@@ -1,4 +1,4 @@
-import { ErrorSeverity, ErrorType } from '@errorLog';
+import { ErrorSeverity, ErrorType } from '@roelcrabbe/optirig-types';
 
 export class OptiRigError extends Error {
     public readonly statusCode: number;

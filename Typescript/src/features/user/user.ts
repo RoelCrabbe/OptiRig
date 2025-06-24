@@ -1,7 +1,12 @@
 import { UserBase } from '@base/userBase';
 import { ValidationError } from '@errorLog/exceptions';
 import { PrismaUser } from '@prisma';
-import { UserRole, UserStatus, isValidUserRole, isValidUserStatus } from '@user';
+import {
+    UserRole,
+    UserStatus,
+    isValidUserRole,
+    isValidUserStatus,
+} from '@roelcrabbe/optirig-types';
 
 export class User extends UserBase {
     constructor(user: {

@@ -1,5 +1,5 @@
 import { AuthenticationError, ValidationError } from '@errorLog/exceptions';
-import { JwtToken, UpdatePassWordInput, UserInput } from '@types';
+import { JwtToken, UpdatePassWordType, UserType } from '@roelcrabbe/optirig-types';
 import { User, userRepository, userService } from '@user/index';
 import bcrypt from 'bcryptjs';
 
@@ -7,7 +7,7 @@ export const updateUser = async ({
     userInput,
     auth,
 }: {
-    userInput: UserInput;
+    userInput: UserType;
     auth: JwtToken;
 }): Promise<User> => {
     if (!userInput.id) throw new ValidationError('User id is required');
@@ -47,7 +47,7 @@ export const changePassWord = async ({
     updatePassWordInput,
     auth,
 }: {
-    updatePassWordInput: UpdatePassWordInput;
+    updatePassWordInput: UpdatePassWordType;
     auth: JwtToken;
 }): Promise<User> => {
     const { currentPassWord, newPassWord, confirmPassWord } = updatePassWordInput;

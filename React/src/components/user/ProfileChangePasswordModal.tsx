@@ -7,14 +7,15 @@ import StatusMessage from '@components/ui/StatusMessage';
 import { faLock, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handleErrorLabel } from '@lib';
+import { UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
-import { LabelMessage, User } from '@types';
+import { LabelMessage } from '@types';
 import { validatePassWord } from '@validators/user';
 import { useState } from 'react';
 interface Props {
-    user: User;
+    user: UserType;
     onClose: () => void;
-    onUpdate: (updatedUser: User) => void;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const ProfileChangePasswordModal: React.FC<Props> = ({ user, onClose, onUpdate }) => {

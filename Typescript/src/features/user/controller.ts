@@ -1,4 +1,4 @@
-import { JwtToken, UpdatePassWordInput, UserInput } from '@types';
+import { JwtToken, UpdatePassWordType, UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@user';
 import express, { NextFunction, Request, Response } from 'express';
 
@@ -27,7 +27,7 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 userRouter.put('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = <UserInput>req.body;
+        const user = <UserType>req.body;
         const header = req as Request & { auth: JwtToken };
         const response = await userService.updateUser({
             userInput: user,
@@ -51,7 +51,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
 
 userRouter.put('/change-password', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const updatePassWord = <UpdatePassWordInput>req.body;
+        const updatePassWord = <UpdatePassWordType>req.body;
         const header = req as Request & { auth: JwtToken };
         const response = await userService.changePassWord({
             updatePassWordInput: updatePassWord,

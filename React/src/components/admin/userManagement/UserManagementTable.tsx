@@ -15,19 +15,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter } from '@lib';
-import { getUserRoleColor, getUserStatusColor, getUserStatusIcon, User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
+import { getUserRoleColor, getUserStatusColor, getUserStatusIcon } from '@types';
 import { useState } from 'react';
 
 interface Props {
-    users: User[];
+    users: UserType[];
     isError: boolean;
     isLoading: boolean;
     onRetry: () => void;
-    onUpdate: (updatedUser: User) => void;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const UserManagementTable: React.FC<Props> = ({ users, isError, isLoading, onRetry, onUpdate }) => {
-    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
@@ -44,7 +45,7 @@ const UserManagementTable: React.FC<Props> = ({ users, isError, isLoading, onRet
         );
     }
 
-    const handleViewDetails = (user: User) => {
+    const handleViewDetails = (user: UserType) => {
         setSelectedUser(user);
         setShowDetailsModal(true);
     };

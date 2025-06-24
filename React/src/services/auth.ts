@@ -1,7 +1,7 @@
 import { processEnv } from '@lib';
-import { User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
 
-export const loginUser = (user: User) => {
+export const loginUser = (user: UserType) => {
     return fetch(processEnv.getApiUrl() + '/auth/login', {
         method: 'POST',
         headers: {
@@ -11,7 +11,7 @@ export const loginUser = (user: User) => {
     });
 };
 
-export const registerUser = (user: User) => {
+export const registerUser = (user: UserType) => {
     return fetch(processEnv.getApiUrl() + '/auth/register', {
         method: 'POST',
         headers: {

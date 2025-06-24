@@ -1,4 +1,3 @@
-export * from './enums';
 export { ErrorLog } from './errorLog';
 export * as errorLogFaker from './faker';
 export * as middleWareHandler from './handler';

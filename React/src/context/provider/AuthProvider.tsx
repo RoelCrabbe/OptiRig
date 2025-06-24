@@ -1,13 +1,13 @@
 import { isAuthPage, ROUTES } from '@config/routes';
 import { getToken, removeAuthToken } from '@lib';
+import { UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { User } from '@types';
 import { useRouter } from 'next/router';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
-    getValue: () => User | null;
+    getValue: () => UserType | null;
     isAuthenticated: boolean;
     isLoading: boolean;
     logout: () => void;
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         error,
         failureCount,
         isLoading,
-    } = useQuery<User | null>({
+    } = useQuery<UserType | null>({
         queryKey: ['current-user'],
         staleTime: 10 * 60 * 1000,
         enabled: isHydrated && getToken() !== null,
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const response = await userService.getCurrentUser();
             if (!response.ok)
                 throw new Error(`CurrentUser Error ${response.status}: ${response.statusText}`);
-            return (await response.json()) as User;
+            return (await response.json()) as UserType;
         },
     });
 

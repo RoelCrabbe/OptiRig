@@ -3,14 +3,14 @@ import Card from '@components/ui/container/Card';
 import Column from '@components/ui/container/Column';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
 
 interface Props {
-    users: User[];
+    users: UserType[];
     isError: boolean;
     isLoading: boolean;
     onRetry: () => void;
-    onUpdate: (updatedUser: User) => void;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const UserManagement: React.FC<Props> = ({ users, isError, isLoading, onRetry, onUpdate }) => {

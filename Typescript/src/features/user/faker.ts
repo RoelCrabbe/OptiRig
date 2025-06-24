@@ -1,5 +1,5 @@
 import database from '@config/prismaClient';
-import { UserRole, UserStatus } from '@user/enums';
+import { UserRole, UserStatus } from '@roelcrabbe/optirig-types';
 import { userRepository } from '@user/index';
 import { User } from '@user/user';
 import bcrypt from 'bcryptjs';

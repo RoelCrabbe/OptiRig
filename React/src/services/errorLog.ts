@@ -1,5 +1,5 @@
 import { getToken, processEnv } from '@lib';
-import { ErrorLog } from '@types';
+import { ErrorLogType } from '@roelcrabbe/optirig-types';
 
 export const getAllNewErrorLogs = () => {
     return fetch(processEnv.getApiUrl() + `/error-logs/new`, {
@@ -31,7 +31,7 @@ export const getAllResolvedErrorLogs = () => {
     });
 };
 
-export const updateErrorLog = (errorLog: ErrorLog) => {
+export const updateErrorLog = (errorLog: ErrorLogType) => {
     return fetch(processEnv.getApiUrl() + `/error-logs`, {
         method: 'PUT',
         headers: {

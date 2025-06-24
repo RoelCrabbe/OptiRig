@@ -9,10 +9,9 @@ import StatusMessage from '@components/ui/StatusMessage';
 import { faDownload, faEdit, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter, formatDateOnly } from '@lib';
+import { ErrorLogType, ErrorStatus } from '@roelcrabbe/optirig-types';
 import { errorLogService } from '@services/index';
 import {
-    ErrorLog,
-    ErrorStatus,
     getErrorHttpMethodColor,
     getErrorHttpMethodIcon,
     getErrorSeverityColor,
@@ -26,9 +25,9 @@ import {
 import { useEffect, useState } from 'react';
 
 interface Props {
-    errorLog: ErrorLog;
+    errorLog: ErrorLogType;
     onClose: () => void;
-    onUpdate: (updatedErrorLog: ErrorLog) => void;
+    onUpdate: (updatedErrorLog: ErrorLogType) => void;
 }
 
 const ErrorLogDetailsModal: React.FC<Props> = ({ errorLog, onClose, onUpdate }) => {

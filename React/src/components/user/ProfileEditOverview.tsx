@@ -21,14 +21,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter, handleErrorLabel } from '@lib';
+import { UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
-import {
-    getUserRoleColor,
-    getUserStatusColor,
-    getUserStatusIcon,
-    LabelMessage,
-    User,
-} from '@types';
+import { getUserRoleColor, getUserStatusColor, getUserStatusIcon, LabelMessage } from '@types';
 import {
     validateEmail,
     validateFirstName,
@@ -39,9 +34,9 @@ import {
 import { useEffect, useState } from 'react';
 
 interface Props {
-    user: User;
+    user: UserType;
     onClose: () => void;
-    onUpdate: (updatedUser: User) => void;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const ProfileEditForm: React.FC<Props> = ({ user, onClose, onUpdate }) => {

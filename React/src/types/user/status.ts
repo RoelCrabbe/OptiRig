@@ -1,32 +1,5 @@
 import { faCheckCircle, faTrash, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
-
-export const UserStatus = {
-    Active: 'Active',
-    InActive: 'Inactive',
-    Deleted: 'Deleted',
-} as const;
-
-export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus];
-
-export const isValidUserStatus = (status: unknown): status is UserStatus => {
-    return typeof status === 'string' && Object.values(UserStatus).includes(status as UserStatus);
-};
-
-export const isActiveUserStatus = (status: UserStatus): boolean => {
-    return status === UserStatus.Active;
-};
-
-export const isInactiveUserStatus = (status: UserStatus): boolean => {
-    return status === UserStatus.InActive;
-};
-
-export const isDeletedUserStatus = (status: UserStatus): boolean => {
-    return status === UserStatus.Deleted;
-};
-
-export const isUserAccessible = (status: UserStatus): boolean => {
-    return status !== UserStatus.Deleted;
-};
+import { UserStatus } from '@roelcrabbe/optirig-types';
 
 export const getUserStatusColor = (status: UserStatus) => {
     switch (status) {

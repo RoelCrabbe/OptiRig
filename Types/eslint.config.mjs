@@ -18,9 +18,6 @@ export default [
                 exports: 'writable',
                 __dirname: 'readonly',
                 __filename: 'readonly',
-                setTimeout: 'readonly',
-                document: 'readonly',
-                Element: 'readonly',
             },
         },
         rules: {

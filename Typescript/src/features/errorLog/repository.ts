@@ -1,6 +1,7 @@
 import database from '@config/prismaClient';
-import { ErrorLog, ErrorStatus } from '@errorLog';
+import { ErrorLog } from '@errorLog';
 import { Prisma } from '@prisma/client';
+import { ErrorStatus } from '@roelcrabbe/optirig-types';
 
 export const getAllByStatus = async (status: ErrorStatus): Promise<ErrorLog[]> => {
     try {

@@ -1,6 +1,10 @@
-import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from '@errorLog';
-import { UserRole, UserStatus } from '@user';
-import { RegionCode } from 'features/parts/enums';
+import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from './errorLog/types';
+import { RegionCode } from './parts/types';
+import { UserRole, UserStatus } from './user/types';
+
+export * from './errorLog/types';
+export * from './parts/types';
+export * from './user/types';
 
 export type AuthenticationResponse = {
     token?: string;
@@ -11,7 +15,7 @@ export type JwtToken = {
     role: UserRole;
 };
 
-export type UserInput = {
+export type UserType = {
     id?: number;
     userName: string;
     firstName: string;
@@ -21,9 +25,19 @@ export type UserInput = {
     role: UserRole;
     status: UserStatus;
     phoneNumber?: string;
+    profileImage?: ProfileImageType;
 };
 
-export type ErrorLogInput = {
+export type ProfileImageType = {
+    id?: number;
+    url: string;
+    altText: string;
+    fileName: string;
+    mimeType: string;
+    fileSize: number;
+};
+
+export type ErrorLogType = {
     id?: number;
     type: ErrorType;
     severity: ErrorSeverity;
@@ -36,19 +50,19 @@ export type ErrorLogInput = {
     resolvedDate?: Date;
 };
 
-export type UpdatePassWordInput = {
+export type UpdatePassWordType = {
     id?: number;
     currentPassWord: string;
     newPassWord: string;
     confirmPassWord: string;
 };
 
-export type SearchOptionsInput = {
+export type SearchOptionsType = {
     region?: RegionCode;
     listId: string;
 };
 
-export type PcPart = {
+export type PcPartType = {
     category: string;
     name: string;
     imageUrl: string;

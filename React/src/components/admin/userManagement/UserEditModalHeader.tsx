@@ -6,10 +6,11 @@ import Row from '@components/ui/container/Row';
 import UserAvatar from '@components/ui/UserAvatar';
 import { faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { capitalizeFirstLetter } from '@lib';
-import { getUserRoleColor, getUserStatusColor, getUserStatusIcon, User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
+import { getUserRoleColor, getUserStatusColor, getUserStatusIcon } from '@types';
 
 interface Props {
-    user: User;
+    user: UserType;
 }
 
 const UserEditModalHeader: React.FC<Props> = ({ user }) => {

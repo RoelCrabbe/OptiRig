@@ -1,5 +1,5 @@
 import { errorLogService } from '@errorLog';
-import { ErrorLogInput, JwtToken } from '@types';
+import { ErrorLogType, JwtToken } from '@roelcrabbe/optirig-types';
 import express, { NextFunction, Request, Response } from 'express';
 
 const errorLogRouter = express.Router();
@@ -33,7 +33,7 @@ errorLogRouter.get('/resolved', async (req: Request, res: Response, next: NextFu
 
 errorLogRouter.put('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const errorLog = <ErrorLogInput>req.body;
+        const errorLog = <ErrorLogType>req.body;
         const header = req as Request & { auth: JwtToken };
         const response = await errorLogService.updateErrorLog({
             errorLogInput: errorLog,

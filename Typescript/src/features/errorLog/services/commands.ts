@@ -1,8 +1,13 @@
-import { ErrorHttpMethod, ErrorStatus, isValidErrorHttpMethod } from '@errorLog/enums';
 import { ErrorLog } from '@errorLog/errorLog';
 import { OptiRigError, ValidationError } from '@errorLog/exceptions';
 import { errorLogRepository, errorLogService } from '@errorLog/index';
-import { ErrorLogInput, JwtToken } from '@types';
+import {
+    ErrorHttpMethod,
+    ErrorLogType,
+    ErrorStatus,
+    isValidErrorHttpMethod,
+    JwtToken,
+} from '@roelcrabbe/optirig-types';
 import { userService } from '@user/index';
 import { capitalizeFirstLetter } from '@utils/string';
 import { Request } from 'express';
@@ -42,7 +47,7 @@ export const updateErrorLog = async ({
     errorLogInput,
     auth,
 }: {
-    errorLogInput: ErrorLogInput;
+    errorLogInput: ErrorLogType;
     auth: JwtToken;
 }): Promise<ErrorLog> => {
     if (!errorLogInput.id) throw new ValidationError('ErrorLog id is required');

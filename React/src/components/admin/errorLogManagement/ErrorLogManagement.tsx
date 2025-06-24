@@ -3,16 +3,16 @@ import Card from '@components/ui/container/Card';
 import Column from '@components/ui/container/Column';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ErrorLogType, ErrorStatus } from '@roelcrabbe/optirig-types';
 import { useQueryClient } from '@tanstack/react-query';
-import { ErrorLog, ErrorStatus } from '@types';
 
 interface Props {
     selectedStatus: ErrorStatus;
-    errorLogs: ErrorLog[];
+    errorLogs: ErrorLogType[];
     isError: boolean;
     isLoading: boolean;
     onRetry: () => void;
-    onUpdate: (updatedErrorLog: ErrorLog) => void;
+    onUpdate: (updatedErrorLog: ErrorLogType) => void;
     onStatusChange: (updatedStatus: ErrorStatus) => void;
 }
 

@@ -9,8 +9,9 @@ import InputSelect from '@components/ui/InputSelect';
 import StatusMessage from '@components/ui/StatusMessage';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { handleErrorLabel } from '@lib';
+import { UserRole, UserStatus, UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
-import { LabelMessage, User, UserRole, UserStatus } from '@types';
+import { LabelMessage } from '@types';
 import {
     validateEmail,
     validateFirstName,
@@ -22,10 +23,10 @@ import {
 } from '@validators/user';
 import { useState } from 'react';
 interface Props {
-    user: User;
+    user: UserType;
     onCancel: () => void;
     onClose: () => void;
-    onUpdate: (updatedUser: User) => void;
+    onUpdate: (updatedUser: UserType) => void;
 }
 
 const UserEditModal: React.FC<Props> = ({ user, onCancel, onClose, onUpdate }) => {

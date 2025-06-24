@@ -1,0 +1,39 @@
+{
+    "name": "@roelcrabbe/optirig-types",
+    "version": "0.0.1",
+    "description": "Shared TypeScript types and DTOs for OptiRig monorepo",
+    "author": "Roel Crabbé",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RoelCrabbe/OptiRig"
+    },
+    "scripts": {
+        "clean": "rm -rf dist",
+        "type-check": "tsc --noEmit",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "format": "prettier --write .",
+        "build": "tsup",
+        "prepublishOnly": "npm run lint:fix && npm run format && npm run type-check && npm run build",
+        "watch": "tsc -w --emitDeclarationOnly"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "devDependencies": {
+        "@eslint/js": "^9.29.0",
+        "@typescript-eslint/eslint-plugin": "^8.34.0",
+        "@typescript-eslint/parser": "^8.34.0",
+        "eslint": "^9.29.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.4.1",
+        "nodemon": "^3.1.10",
+        "prettier": "^3.5.3",
+        "prettier-plugin-organize-imports": "^4.1.0",
+        "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
+        "tsup": "^8.5.0",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.34.0"
+    }
+}

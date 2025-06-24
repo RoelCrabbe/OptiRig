@@ -1,14 +1,9 @@
 import database from '@config/prismaClient';
-import {
-    ErrorHttpMethod,
-    ErrorLog,
-    errorLogRepository,
-    ErrorSeverity,
-    ErrorStatus,
-    ErrorType,
-} from '@errorLog';
+import { ErrorHttpMethod, ErrorSeverity, ErrorStatus, ErrorType } from '@roelcrabbe/optirig-types';
 import { User } from '@user';
 import casual from 'casual';
+import { errorLogRepository } from '.';
+import { ErrorLog } from './errorLog';
 
 const errorTypes = Object.values(ErrorType);
 const errorSeverities = Object.values(ErrorSeverity);

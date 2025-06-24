@@ -1,13 +1,13 @@
 import { AuthenticationError } from '@errorLog/exceptions';
-import { AuthenticationResponse, UserInput } from '@types';
-import { User, isActiveUserStatus, userRepository, userService } from '@user';
+import { AuthenticationResponse, isActiveUserStatus, UserType } from '@roelcrabbe/optirig-types';
+import { User, userRepository, userService } from '@user';
 import { generateJwtToken } from '@utils/jwt';
 import bcrypt from 'bcryptjs';
 
 export const loginUser = async ({
     userInput,
 }: {
-    userInput: UserInput;
+    userInput: UserType;
 }): Promise<AuthenticationResponse> => {
     const { userName, passWord } = userInput;
     const fUser = await userService.getUserByUserName({ userName });
@@ -29,7 +29,7 @@ export const loginUser = async ({
 export const registerUser = async ({
     userInput,
 }: {
-    userInput: UserInput;
+    userInput: UserType;
 }): Promise<AuthenticationResponse> => {
     const { firstName, lastName, email, phoneNumber, userName, passWord } = userInput;
 

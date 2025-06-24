@@ -1,10 +1,10 @@
-import { ErrorLog } from '@types';
+import { ErrorLogType } from '@roelcrabbe/optirig-types';
 
 export const updateErrorLogs = (
-    prev: ErrorLog[],
-    updated: ErrorLog,
+    prev: ErrorLogType[],
+    updated: ErrorLogType,
     selectedStatus: string,
-): ErrorLog[] => {
+): ErrorLogType[] => {
     const { id, status } = updated;
     const statusChanged = status !== selectedStatus;
 

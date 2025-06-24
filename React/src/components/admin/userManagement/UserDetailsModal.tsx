@@ -17,9 +17,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitalizeFirstLetter } from '@lib';
+import { UserType } from '@roelcrabbe/optirig-types';
 import { userService } from '@services/index';
 import { useQuery } from '@tanstack/react-query';
-import { getUserRoleColor, getUserStatusColor, getUserStatusIcon, User } from '@types';
+import { getUserRoleColor, getUserStatusColor, getUserStatusIcon } from '@types';
 
 interface PropsBase {
     onEdit?: () => void;
@@ -27,7 +28,7 @@ interface PropsBase {
 }
 
 interface PropsWithUser extends PropsBase {
-    user: User;
+    user: UserType;
     userId?: never;
 }
 
@@ -52,7 +53,7 @@ const UserDetailsModal: React.FC<Props> = ({ user, userId, onEdit, onClose }) =>
         queryFn: async () => {
             const response = await userService.getUserById(userId as number);
             if (!response.ok) throw new Error(`User with id ${userId} not found`);
-            return (await response.json()) as User;
+            return (await response.json()) as UserType;
         },
     });
 

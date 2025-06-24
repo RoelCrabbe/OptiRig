@@ -1,6 +1,6 @@
 import { errorLogService } from '@errorLog';
 import { OptiRigError } from '@errorLog/exceptions';
-import { JwtToken } from '@types';
+import { JwtToken } from '@roelcrabbe/optirig-types';
 import { Request, Response } from 'express';
 
 export const handleErrorMiddleware = async ({

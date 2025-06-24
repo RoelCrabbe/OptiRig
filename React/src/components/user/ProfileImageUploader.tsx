@@ -2,11 +2,12 @@ import UserAvatar from '@components/ui/UserAvatar';
 import { faCamera, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { compressImageUntilSize } from '@lib';
-import { LabelMessage, User } from '@types';
+import { UserType } from '@roelcrabbe/optirig-types';
+import { LabelMessage } from '@types';
 import { useRef, useState } from 'react';
 
 interface Props {
-    user: User;
+    user: UserType;
     onImageChange: (file: File | null, preview: string | null) => void;
     onError: (labelMessage: LabelMessage) => void;
     onProcessing: (labelMessage: LabelMessage) => void;

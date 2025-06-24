@@ -1,6 +1,6 @@
 import { ROUTES } from '@config/routes';
 import { useAuth } from '@provider/AuthProvider';
-import { UserRole } from '@types';
+import { UserRole } from '@roelcrabbe/optirig-types';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

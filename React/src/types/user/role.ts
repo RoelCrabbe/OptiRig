@@ -1,34 +1,22 @@
-import { User } from '@types';
+import { UserRole, UserType, isValidUserRole } from '@roelcrabbe/optirig-types';
 
-export const UserRole = {
-    Admin: 'Admin',
-    HumanResources: 'Human Resources',
-    Guest: 'Guest',
-} as const;
-
-export type UserRole = (typeof UserRole)[keyof typeof UserRole];
-
-export const isValidUserRole = (role: unknown): role is UserRole => {
-    return typeof role === 'string' && Object.values(UserRole).includes(role as UserRole);
-};
-
-export const getUserRole = (user: User | null): UserRole | null => {
+export const getUserRole = (user: UserType | null): UserRole | null => {
     return user?.role && isValidUserRole(user.role) ? user.role : null;
 };
 
-export const isUserRole = (user: User | null, role: UserRole): boolean => {
+export const isUserRole = (user: UserType | null, role: UserRole): boolean => {
     return getUserRole(user) === role;
 };
 
-export const isAdmin = (user: User | null): boolean => {
+export const isAdmin = (user: UserType | null): boolean => {
     return isUserRole(user, UserRole.Admin);
 };
 
-export const isHumanResources = (user: User | null): boolean => {
+export const isHumanResources = (user: UserType | null): boolean => {
     return isUserRole(user, UserRole.HumanResources);
 };
 
-export const isGuest = (user: User | null): boolean => {
+export const isGuest = (user: UserType | null): boolean => {
     return isUserRole(user, UserRole.Guest);
 };
 

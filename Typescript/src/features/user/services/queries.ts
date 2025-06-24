@@ -1,5 +1,5 @@
 import { NotFoundError } from '@errorLog/exceptions';
-import { JwtToken } from '@types';
+import { JwtToken } from '@roelcrabbe/optirig-types';
 import { User, userRepository } from '@user/index';
 
 /**
