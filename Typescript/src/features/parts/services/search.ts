@@ -1,4 +1,9 @@
-import { PcPartType, RegionCode, SearchOptionsType } from '@roelcrabbe/optirig-types';
+import {
+    PcPartCategory,
+    PcPartType,
+    RegionCode,
+    SearchOptionsType,
+} from '@roelcrabbe/optirig-types';
 import puppeteer from 'puppeteer';
 
 const PcPartTrackerDefaultUrl = 'pcpartpicker.com';
@@ -95,7 +100,8 @@ export const getComponentList = async ({
                     const imageUrl = extractImageUrl(row);
 
                     results.push({
-                        category: component,
+                        id: index + 1,
+                        category: component as PcPartCategory,
                         name,
                         imageUrl,
                         pcpartpicker: {

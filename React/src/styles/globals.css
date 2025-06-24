@@ -78,6 +78,38 @@
     .bg-surface {
         @apply bg-gray-50 dark:bg-gray-900;
     }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+
+    .cpu-icon {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    }
+    .memory-icon {
+        background: linear-gradient(45deg, #4ecdc4, #44bd87);
+    }
+    .storage-icon {
+        background: linear-gradient(45deg, #45b7d1, #96ceb4);
+    }
+    .video-icon {
+        background: linear-gradient(45deg, #f093fb, #f5576c);
+    }
+    .motherboard-icon {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+    }
+    .case-icon {
+        background: linear-gradient(45deg, #43e97b, #38f9d7);
+    }
+    .psu-icon {
+        background: linear-gradient(45deg, #fa709a, #fee140);
+    }
+    .cooler-icon {
+        background: linear-gradient(45deg, #a8edea, #fed6e3);
+    }
 }
 
 /* Shared typography styles */

@@ -6,6 +6,8 @@ export * from './errorLog/severity';
 export * from './errorLog/status';
 export * from './errorLog/type';
 
+export * from './parts/category';
+
 export type LabelMessage = {
     label: string;
     message: string;

@@ -62,8 +62,20 @@ export type SearchOptionsType = {
     listId: string;
 };
 
+export type PcPartCategory =
+    | 'CPU'
+    | 'CPU Cooler'
+    | 'Motherboard'
+    | 'Memory'
+    | 'Storage'
+    | 'Video Card'
+    | 'Case'
+    | 'Power Supply'
+    | 'PSU';
+
 export type PcPartType = {
-    category: string;
+    id?: number;
+    category: PcPartCategory;
     name: string;
     imageUrl: string;
     pcpartpicker: {

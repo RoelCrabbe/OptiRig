@@ -13,5 +13,6 @@
     },
     "[feature]": {
         "editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
-    }
+    },
+    "cSpell.words": ["optirig", "roelcrabbe", "Xmark"]
 }
